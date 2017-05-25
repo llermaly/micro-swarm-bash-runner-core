@@ -71,7 +71,7 @@ const handle_incoming_message = (omsg) => {
     }).then((response) => {
       return response.text()
     }).then((response_text) => {
-      console.log(response_text)
+      //console.log(response_text)
     })
   }
 }
