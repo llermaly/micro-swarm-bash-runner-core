@@ -10,6 +10,10 @@ import params from '../params'
 
 let sockets = {}
 
+let ress = {}
+
+let nexts = {}
+
 let lastSocket = null
 
 const wss = new WebSocket.Server({ port: params.WS_PORT })
@@ -63,6 +67,17 @@ const handle_incoming_message = (omsg) => {
   let msg = JSON.parse(omsg)
   let form = new formData
   if(msg.action == 'cert_created') {
+    let res = ress[accountName]
+    if (res) {
+      res.status(200)
+      res.json({
+        status: 200,
+        message: 'Message propagated to the swarm.',
+        cert: msg.payload
+      })
+      res.end()
+      return next()
+    }
     form.append('accountName', msg.accountName)
     form.append('cert', msg.payload)
     fetch(params.submitUrl, {
@@ -86,7 +101,9 @@ const deleteSingle = (accountName, node_id) => {
   sockets[node_id].send(composeDelete(accountName))
 }
 
-const createSingle = (accountName) => {
+const createSingle = (accountName, res, next) => {
+  ress[accountName] = res
+  nexts[accountName] = next
   /* wea fea */
   if(lastSocket == null || Object.keys(sockets)[Object.keys(sockets).length - 1] == lastSocket) {
     lastSocket = Object.keys(sockets)[0]
@@ -112,7 +129,6 @@ const composeDelete = (accountName) => {
 }
 
 const composeCreate = (accountName, ls) => {
-  console.log(ls)
   return JSON.stringify({
     action: 'create_user',
     accountName,

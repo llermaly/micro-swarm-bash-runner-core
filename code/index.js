@@ -28,12 +28,7 @@ server.get('/', (req, res, next) => {
 server.get('/create/:id', (req, res, next) => {
   
   if(req.params.id.length > 0) {
-    createSingle(req.params.id)
-    res.status(200)
-    res.json({
-      status: 200,
-      message: 'Message propagated to the swarm.'
-    })
+    createSingle(req.params.id, res, next)
   }
   else {
     res.status(404)
@@ -41,10 +36,10 @@ server.get('/create/:id', (req, res, next) => {
       status: 404,
       message: 'Error: accountName missing.'
     })
+    res.end()
+    return next()
   }
 
-  res.end()
-  return next()
 })
 
 server.get('/delete/:id', (req, res, next) => {
