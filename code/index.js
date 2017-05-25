@@ -28,7 +28,7 @@ server.get('/', (req, res, next) => {
 server.get('/create/:id', (req, res, next) => {
   
   if(req.params.id.length > 0) {
-    createSingle(req.params.id.length)
+    createSingle(req.params.id)
     res.status(200)
     res.json({
       status: 200,
