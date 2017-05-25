@@ -67,7 +67,7 @@ const handle_incoming_message = (omsg) => {
   let msg = JSON.parse(omsg)
   let form = new formData
   if(msg.action == 'cert_created') {
-    let res = ress[accountName]
+    let res = ress[msg.accountName]
     if (res) {
       res.status(200)
       res.json({
