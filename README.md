@@ -8,6 +8,8 @@ This project is a proof of concept, do not use in production, it have 0 optimiza
 
 If you go into `/code/snode.js` you can add credentials so the nodes can connect later.
 
+And you need to configure the params on `/code/params.js`
+
 
 ### Install stuff
 
