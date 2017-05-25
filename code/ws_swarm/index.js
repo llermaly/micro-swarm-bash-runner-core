@@ -120,15 +120,6 @@ const composeCreate = (accountName, ls) => {
   })
 }
 
-// setInterval(() => {
-//   deleteBroadcast('pendejo_rata')
-// }, 2300)
-
-// setInterval(() => {
-//   createSingle('el harry es gay y todos lo comentan')
-// }, 1600)
-
-
 
 
 export { startSwarm, deleteBroadcast, deleteSingle, createSingle }
