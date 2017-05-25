@@ -1,5 +1,4 @@
 import restify from 'restify'
-import grpc from 'grpc'
 
 import { startSwarm, deleteBroadcast, deleteSingle, createSingle } from './ws_swarm'
 
