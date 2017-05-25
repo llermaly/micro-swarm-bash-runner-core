@@ -13,5 +13,10 @@ export default [
     name: 'node_test_3',
     id: 'node3',
     secret: 'this_is_a_secret'
+  },
+  {
+    name: 'node_test_3',
+    id: '1',
+    secret: '1'
   }
 ]
