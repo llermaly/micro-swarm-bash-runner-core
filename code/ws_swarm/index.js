@@ -90,6 +90,24 @@ const handle_incoming_message = (omsg) => {
       //console.log(response_text)
     })
   }
+  if(msg.action == 'get_connected_users') {
+    let res = ress[msg.connected_users]
+    let next = nexts[msg.connected_users]
+    if (res) {
+      res.status(200)
+      res.json({
+        status: 200,
+        message: 'Message propagated to the swarm.',
+        connected_users: msg.connected_users
+      })
+      res.end()
+      return next()
+    }
+  }
+}
+
+const getConnectedUsers = (node_id) => {
+  sockets[node_id].send(composeConnectedUsers())
 }
 
 const deleteBroadcast = (accountName) => {
@@ -120,6 +138,13 @@ const createSingle = (accountName, res, next) => {
   sockets[lastSocket].send(composeCreate(accountName, lastSocket))
 
 
+}
+
+const composeConnectedUsers = (ls) => {
+  return JSON.stringify({
+    action: 'get_connected_users',
+    node_id: ls
+  })
 }
 
 const composeDelete = (accountName) => {

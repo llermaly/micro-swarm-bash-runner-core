@@ -24,9 +24,23 @@ server.get('/', (req, res, next) => {
     version: server.version
   })
 })
+server.get('/connected_users/:serverId', (req, res, next) => {
+  if(req.params.serverId.length > 0) {
+    getConnectedUsers(req.params.serverId, res, next)
+  }
+  else {
+    res.status(404)
+    res.json({
+      status: 404,
+      message: 'Error: server unavailable.'
+    })
+    res.end()
+    return next()
+  }
+
+})
 
 server.get('/create/:id', (req, res, next) => {
-  
   if(req.params.id.length > 0) {
     createSingle(req.params.id, res, next)
   }
