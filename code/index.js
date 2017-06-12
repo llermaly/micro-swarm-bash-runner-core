@@ -1,6 +1,6 @@
 import restify from 'restify'
 
-import { startSwarm, deleteBroadcast, deleteSingle, createSingle } from './ws_swarm'
+import { startSwarm, deleteBroadcast, deleteSingle, createSingle, getConnectedUsers } from './ws_swarm'
 
 import snodes from './snodes' 
 
