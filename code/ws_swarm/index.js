@@ -164,4 +164,4 @@ const composeCreate = (accountName, ls) => {
 
 
 
-export { startSwarm, deleteBroadcast, deleteSingle, createSingle }
+export { startSwarm, deleteBroadcast, deleteSingle, createSingle, getConnectedUsers  }
