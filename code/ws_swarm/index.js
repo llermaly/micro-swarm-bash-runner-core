@@ -107,7 +107,7 @@ const handle_incoming_message = (omsg) => {
 }
 
 const getConnectedUsers = (node_id) => {
-  sockets[node_id].send(composeConnectedUsers())
+  sockets[node_id].send(composeConnectedUsers(node_id))
 }
 
 const deleteBroadcast = (accountName) => {
