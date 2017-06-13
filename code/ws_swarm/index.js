@@ -137,6 +137,13 @@ const createSingle = (accountName, res, next) => {
 
   sockets[lastSocket].send(composeCreate(accountName, lastSocket))
 
+}
+
+const createSingleInNode = (accountName,node, res, next) => {
+  ress[accountName] = res
+  nexts[accountName] = next
+
+  sockets[node].send(composeCreate(accountName, node))
 
 }
 
@@ -164,4 +171,4 @@ const composeCreate = (accountName, ls) => {
 
 
 
-export { startSwarm, deleteBroadcast, deleteSingle, createSingle, getConnectedUsers  }
+export { startSwarm, deleteBroadcast, deleteSingle, createSingle,createSingleInNode, getConnectedUsers  }

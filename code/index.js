@@ -1,6 +1,6 @@
 import restify from 'restify'
 
-import { startSwarm, deleteBroadcast, deleteSingle, createSingle, getConnectedUsers } from './ws_swarm'
+import { startSwarm, deleteBroadcast, deleteSingle, createSingle, createSingleInNode, getConnectedUsers } from './ws_swarm'
 
 import snodes from './snodes' 
 
@@ -55,6 +55,24 @@ server.get('/create/:id', (req, res, next) => {
   }
 
 })
+
+server.get('/move/:id/:to', (req, res, next) => {
+  if(req.params.id.length > 0 && req.params.to.length > 0) {
+    deleteBroadcast(req.params.id)
+    createSingleInNode(req.params.id,req.params.to, res, next)
+  }
+  else {
+    res.status(404)
+    res.json({
+      status: 404,
+      message: 'Error: accountName or destination node missing.'
+    })
+    res.end()
+    return next()
+  }
+
+})
+
 
 server.get('/delete/:id', (req, res, next) => {
   if(req.params.id.length > 0) {
