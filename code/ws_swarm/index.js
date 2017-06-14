@@ -74,7 +74,8 @@ const handle_incoming_message = (omsg) => {
       res.json({
         status: 200,
         message: 'Message propagated to the swarm.',
-        cert: msg.payload
+        cert: msg.payload,
+        node_id: msg.node_id
       })
       res.end()
       return next()
