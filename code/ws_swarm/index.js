@@ -92,8 +92,8 @@ const handle_incoming_message = (omsg) => {
     })
   }
   if(msg.action == 'get_connected_users') {
-    let res = ress[msg.connected_users]
-    let next = nexts[msg.connected_users]
+    let res = ress[msg.node_id]
+    let next = nexts[msg.node_id]
     if (res) {
       res.status(200)
       res.json({
@@ -107,7 +107,9 @@ const handle_incoming_message = (omsg) => {
   }
 }
 
-const getConnectedUsers = (node_id) => {
+const getConnectedUsers = (node_id, res, next) => {
+  ress[node_id] = res
+  nexts[node_id] = next
   sockets[node_id].send(composeConnectedUsers(node_id))
 }
 
